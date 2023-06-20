@@ -51,8 +51,10 @@ public class Combat
 
     private bool IsNumberTroopsValid()
     {
-        return _defender.Item2 <= MaxAttackDefendTroops && _defender.Item2 >= MinAttackDefendTroops
-                && _attacker.Item2 <= MaxAttackDefendTroops && _attacker.Item2 >= MinAttackDefendTroops;
+        return _defender.Item2.CompareTo(MaxAttackDefendTroops) <= 0 &&
+               _defender.Item2.CompareTo(MinAttackDefendTroops) >= 0 &&
+               _attacker.Item2.CompareTo(MaxAttackDefendTroops) <= 0 &&
+               _attacker.Item2.CompareTo(MinAttackDefendTroops) >= 0;
     }
 
     private bool CheckAttackValidity()
@@ -63,7 +65,7 @@ public class Combat
     private IList<int> DeclarePower(int number)
     {
         return Enumerable.Range(0, number)
-            .Select(i => RollDice())
+            .Select(_ => RollDice())
             .OrderByDescending(i => i)
             .ToList();
     }
@@ -82,6 +84,6 @@ public class Combat
             attackers.RemoveAt(0);
             defenders.RemoveAt(0);
         }
-        return new Tuple<int, int>(results.Count(v => results.Contains(true)), results.Count(v => results.Contains(false)));
+        return new Tuple<int, int>(results.Count(r => r), results.Count(r => !r));
     }
 }
