@@ -4,7 +4,7 @@ public class Territory
 {
     public string Name { get; set;  }
     public int Troops { get; set; }
-    public ISet<string> Adjust;
+    public readonly ISet<string> Adjust;
 
     public Territory(string name, int troops, ISet<string> adjust)
     {

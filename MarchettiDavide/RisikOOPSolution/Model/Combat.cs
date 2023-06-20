@@ -84,6 +84,6 @@ public class Combat
             attackers.RemoveAt(0);
             defenders.RemoveAt(0);
         }
-        return new Tuple<int, int>(results.Count(r => r), results.Count(r => !r));
+        return new Tuple<int, int>(results.Count(r => !r), results.Count(r => r));
     }
 }

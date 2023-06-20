@@ -57,6 +57,17 @@ public class UnitTest1
         Combat c1 = new Combat(s, 2, d, 3, new List<int>() { 6, 5 },
             new List<int>() { 5, 2, 1 });
         Assert.AreEqual(new Tuple<int, int>(0, 2), c1.Attack(2, 3));
+        d.AddTroops(-2);
+        Assert.AreEqual(3, d.Troops);
+    }
+    
+    [TestMethod]
+    public void CombatWithInvalidTroops()
+    {
+        PreparePlayers();
+        var s = _attackerTerritories[0];
+        var d = _defenderTerritories[0];
+        Assert.ThrowsException<ArgumentException>(() => new Combat(s, 0, d, 3).Attack(0, 3));
     }
 
     private void PreparePlayers()
