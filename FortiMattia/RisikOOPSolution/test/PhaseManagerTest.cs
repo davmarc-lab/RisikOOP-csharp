@@ -5,38 +5,38 @@ namespace RisikOOPSolution.test
     [TestClass]
     public class PhaseManagerTest
     {
-        readonly PhaseManager phaseManager = new();
+        readonly PhaseManager _phaseManager = new();
 
         [TestMethod]
         public void TestPhaseManagerCreation() {
-            Assert.IsNotNull(phaseManager);
+            Assert.IsNotNull(_phaseManager);
         }
 
         [TestMethod]
         public void TestPhaseIteration()
         {
-            Assert.IsTrue(phaseManager.GetCurrentPhase().Equals("REINFORCEMENTS"));
-            phaseManager.SwitchToNextPhase();
-            Assert.IsTrue(phaseManager.GetCurrentPhase().Equals("COMBAT"));
-            phaseManager.SwitchToNextPhase();
-            Assert.IsTrue(phaseManager.GetCurrentPhase().Equals("MOVEMENT"));
-            phaseManager.SwitchToNextPhase();
-            Assert.IsTrue(phaseManager.GetCurrentPhase().Equals("REINFORCEMENTS"));
-            phaseManager.SwitchToNextPhase();
-            Assert.IsTrue(phaseManager.GetCurrentPhase().Equals("COMBAT"));
+            Assert.IsTrue(_phaseManager.GetCurrentPhase().Equals("REINFORCEMENTS"));
+            _phaseManager.SwitchToNextPhase();
+            Assert.IsTrue(_phaseManager.GetCurrentPhase().Equals("COMBAT"));
+            _phaseManager.SwitchToNextPhase();
+            Assert.IsTrue(_phaseManager.GetCurrentPhase().Equals("MOVEMENT"));
+            _phaseManager.SwitchToNextPhase();
+            Assert.IsTrue(_phaseManager.GetCurrentPhase().Equals("REINFORCEMENTS"));
+            _phaseManager.SwitchToNextPhase();
+            Assert.IsTrue(_phaseManager.GetCurrentPhase().Equals("COMBAT"));
         }
 
         [TestMethod]
         public void TestPhaseSkip()
         {
-            phaseManager.SwitchToPhase("REINFORCEMENTS");
-            Assert.IsTrue(phaseManager.GetCurrentPhase().Equals("REINFORCEMENTS"));
-            phaseManager.SwitchToPhase("MOVEMENT");
-            Assert.IsTrue(phaseManager.GetCurrentPhase().Equals("MOVEMENT"));
-            phaseManager.SwitchToPhase("COMBAT");
-            Assert.IsTrue(phaseManager.GetCurrentPhase().Equals("COMBAT"));
-            phaseManager.SwitchToPhase("REINFORCEMENTS");
-            Assert.IsTrue(phaseManager.GetCurrentPhase().Equals("REINFORCEMENTS"));
+            _phaseManager.SwitchToPhase("REINFORCEMENTS");
+            Assert.IsTrue(_phaseManager.GetCurrentPhase().Equals("REINFORCEMENTS"));
+            _phaseManager.SwitchToPhase("MOVEMENT");
+            Assert.IsTrue(_phaseManager.GetCurrentPhase().Equals("MOVEMENT"));
+            _phaseManager.SwitchToPhase("COMBAT");
+            Assert.IsTrue(_phaseManager.GetCurrentPhase().Equals("COMBAT"));
+            _phaseManager.SwitchToPhase("REINFORCEMENTS");
+            Assert.IsTrue(_phaseManager.GetCurrentPhase().Equals("REINFORCEMENTS"));
         }
     }
 }

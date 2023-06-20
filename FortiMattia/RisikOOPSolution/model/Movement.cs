@@ -8,74 +8,47 @@ namespace RisikOOPSolution.model
 {
     internal class Movement
     {
-        private readonly Territory sourceTerritory;
-        private readonly Territory destinationTerritory;
+        public Territory SourceTerritory { get; }
+        public Territory DestinationTerritory { get; }
 
         public Movement(Territory sourceTerritory, Territory destinationTerritory)
         {
-            this.sourceTerritory = new(sourceTerritory);
-            this.destinationTerritory = new(destinationTerritory);
-        }
-
-        public Movement(Movement movement)
-        {
-            this.sourceTerritory = movement.GetSourceTerritory();
-            this.destinationTerritory= movement.GetDestinationTerritory();
+            SourceTerritory = new(sourceTerritory);
+            DestinationTerritory = new(destinationTerritory);
         }
 
         public bool IsMovementValid(int troops)
         {
-            return sourceTerritory.GetTroops() - troops >= 1;
+            return SourceTerritory.Troops - troops >= 1;
         }
 
         public void Move(int troops)
         {
-            sourceTerritory.AddTroops(-troops);
-            destinationTerritory.AddTroops(troops);
+            SourceTerritory.AddTroops(-troops);
+            DestinationTerritory.AddTroops(troops);
         }
-
-        public Territory GetSourceTerritory()
-        {
-            return new(this.sourceTerritory);
-        }
-
-        public Territory GetDestinationTerritory()
-        {
-            return new(this.destinationTerritory);
-        }
-
     }
 
     internal class Territory
     {
-        private readonly string name;
-        private int troops;
+        public string Name { get; }
+        public int Troops { get; set; }
 
         public Territory(String name, int troops)
         {
-            this.name = name;
-            this.troops = troops;
+            Name = name;
+            Troops = troops;
         }
 
         public Territory(Territory territory)
         {
-            this.name = territory.GetName();
-            this.troops = territory.GetTroops();
-        }
-
-        public int GetTroops()
-        {
-            return this.troops;
-        }
-
-        public string GetName()
-        {
-            return this.name;
+            Name = territory.Name;
+            Troops = territory.Troops;
         }
 
         public void AddTroops(int troops)
         {
-            this.troops += troops;
+            Troops += troops;
         }
     }
 }

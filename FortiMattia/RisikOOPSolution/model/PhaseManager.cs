@@ -15,28 +15,28 @@ namespace RisikOOPSolution.model
             MOVEMENT
         }
 
-        private Phase phase;
+        private Phase _phase;
 
         public PhaseManager()
         {
-            this.phase = Phase.REINFORCEMENTS;
+            _phase = Phase.REINFORCEMENTS;
         }
 
         public string GetCurrentPhase()
         {
-            return this.phase.ToString();
+            return _phase.ToString();
         }
 
         public void SwitchToNextPhase()
         {
             Phase[] arr = (Phase[])Enum.GetValues(typeof(Phase));
-            int index = Array.IndexOf(arr, this.phase);
-            this.phase = arr[(index + 1) % arr.Length];
+            int index = Array.IndexOf(arr, _phase);
+            _phase = arr[(index + 1) % arr.Length];
         }
 
         public void SwitchToPhase(string phase)
         {
-            this.phase = (Phase)Enum.Parse(typeof(Phase), phase);
+            _phase = (Phase)Enum.Parse(typeof(Phase), phase);
         }
     }
 }
