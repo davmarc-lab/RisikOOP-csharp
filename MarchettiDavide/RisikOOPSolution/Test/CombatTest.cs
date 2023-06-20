@@ -10,19 +10,32 @@ public class UnitTest1
     private readonly Player _p1 = PlayerBuilder.NewBuilder().Id(1).Territories(new HashSet<Territory>()).Build();
     private readonly Player _p2 = PlayerBuilder.NewBuilder().Id(2).Territories(new HashSet<Territory>()).Build();
 
-    private readonly Territory[] _attackerTerritories = new[] { new Territory("Southern Europe", 5, new HashSet<string>() { "Ukraine", "Egypt" }),
-        new Territory("Venezuela", 5, new HashSet<string>() { "Brazil" }), 
-        new Territory("Scandinavia", 5, new HashSet<string>() { "Ukraine" }), 
-        new Territory("Egypt", 5, new HashSet<string>() { "Southern Europe" }) };
-    
-    
-    private readonly Territory[] _defenderTerritories = new[] { new Territory("Ukraine", 5, new HashSet<string>() { "Southern Europe", "Scandinavia" }),
-        new Territory("Brazil", 5, new HashSet<string>() { "Venezuela" }) };
+    private readonly Territory[] _attackerTerritories = new[]
+    {
+        new Territory("Southern Europe", 5, new HashSet<string>() { "Ukraine", "Egypt" }),
+        new Territory("Venezuela", 5, new HashSet<string>() { "Brazil" }),
+        new Territory("Scandinavia", 5, new HashSet<string>() { "Ukraine" }),
+        new Territory("Egypt", 5, new HashSet<string>() { "Southern Europe" })
+    };
 
+    private readonly Territory[] _defenderTerritories = new[]
+    {
+        new Territory("Ukraine", 5, new HashSet<string>() { "Southern Europe", "Scandinavia" }),
+        new Territory("Brazil", 5, new HashSet<string>() { "Venezuela" })
+    };
+
+    [TestInitialize]
+    private void PreparePlayers()
+    {
+        _p1.Territories.Clear();
+        _p2.Territories.Clear();
+        _p1.AddTerritories(_attackerTerritories);
+        _p2.AddTerritories(_defenderTerritories);
+    }
+    
     [TestMethod]
     public void PlayerCreationTest()
     {
-        PreparePlayers();
         Assert.AreEqual(1, _p1.Id);
         Assert.AreEqual(2, _p2.Id);
     }
@@ -30,7 +43,6 @@ public class UnitTest1
     [TestMethod]
     public void AddTerritoriesToPlayersTest()
     {
-        PreparePlayers();
         Assert.IsTrue(_p1.Territories.IsSupersetOf(_attackerTerritories));
         Assert.IsTrue(_p2.Territories.IsSupersetOf(_defenderTerritories));
     }
@@ -38,7 +50,6 @@ public class UnitTest1
     [TestMethod]
     public void RemoveTerritoriesToPlayersTest()
     {
-        PreparePlayers();
         _p1.RemoveTerritory(_attackerTerritories[0]);
         _p1.RemoveTerritory(_attackerTerritories[2]);
         _p1.RemoveTerritory(_attackerTerritories[3]);
@@ -51,7 +62,6 @@ public class UnitTest1
     [TestMethod]
     public void CombatWithForcedResultTest()
     {
-        PreparePlayers();
         var s = _attackerTerritories[0];
         var d = _defenderTerritories[0];
         Combat c1 = new Combat(s, 2, d, 3, new List<int>() { 6, 5 },
@@ -64,17 +74,8 @@ public class UnitTest1
     [TestMethod]
     public void CombatWithInvalidTroops()
     {
-        PreparePlayers();
         var s = _attackerTerritories[0];
         var d = _defenderTerritories[0];
         Assert.ThrowsException<ArgumentException>(() => new Combat(s, 0, d, 3).Attack(0, 3));
-    }
-
-    private void PreparePlayers()
-    {
-        _p1.Territories.Clear();
-        _p2.Territories.Clear();
-        _p1.AddTerritories(_attackerTerritories);
-        _p2.AddTerritories(_defenderTerritories);
     }
 }
