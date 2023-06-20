@@ -12,4 +12,9 @@ public class Territory
         Troops = troops;
         Adjust = adjust;
     }
+
+    public void AddTroops(int troops)
+    {
+        Troops += troops;
+    }
 }

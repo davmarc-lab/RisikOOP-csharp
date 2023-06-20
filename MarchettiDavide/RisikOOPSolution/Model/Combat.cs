@@ -59,8 +59,8 @@ public class Combat
 
     private bool CheckAttackValidity()
     {
-        return true;
-    }
+        return _attacker.Item1.Adjust.Contains(_defender.Item1.Name);
+         }
 
     private IList<int> DeclarePower(int number)
     {
