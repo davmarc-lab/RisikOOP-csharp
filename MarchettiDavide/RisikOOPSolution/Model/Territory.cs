@@ -2,19 +2,14 @@
 
 public class Territory
 {
+    public string Name { get; set;  }
+    public int Troops { get; set; }
+    public ISet<string> Adjust;
 
-    private string Name { get; set; }
-    private int BonusTroops { get; set; }
-
-    public Territory(string name, int bonusTroops)
+    public Territory(string name, int troops, ISet<string> adjust)
     {
         Name = name;
-        BonusTroops = bonusTroops;
-    }
-
-    public Territory()
-    {
-        Name = string.Empty;
-        BonusTroops = 0;
+        Troops = troops;
+        Adjust = adjust;
     }
 }
