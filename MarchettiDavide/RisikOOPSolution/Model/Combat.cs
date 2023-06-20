@@ -1,5 +1,11 @@
 namespace RisikOOPSolution.Model;
 
+internal enum Result
+{
+    Win,
+    Lose
+}
+
 public class Combat
 {
     private const int MaxDiceNumber = 6;
@@ -77,13 +83,13 @@ public class Combat
 
     private Tuple<int, int> ComputeAttack(IList<int> attackers, IList<int> defenders)
     {
-        IList<bool> results = new List<bool>();
+        IList<Result> results = new List<Result>();
         while (attackers.Any() && defenders.Any())
         {
-            results.Add(attackers[0] > defenders[0]);
+            results.Add(attackers[0] > defenders[0] ? Result.Win : Result.Lose);
             attackers.RemoveAt(0);
             defenders.RemoveAt(0);
         }
-        return new Tuple<int, int>(results.Count(r => !r), results.Count(r => r));
+        return new Tuple<int, int>(results.Count(r => r.Equals(Result.Lose)), results.Count(r => r.Equals(Result.Win)));
     }
 }
