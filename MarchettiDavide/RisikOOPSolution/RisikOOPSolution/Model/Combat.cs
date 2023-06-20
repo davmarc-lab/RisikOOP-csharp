@@ -1,14 +1,11 @@
 namespace RisikOOPSolution.Model;
 
-static class Constants
-{
-    public const int MAX_DICE_NUMBER = 6;
-    public const int MAX_ATTACK_DEFEND_ARMY = 3;
-    public const int MIN_ATTACK_DEFEND_ARMY = 1;
-}
-
 public class Combat
 {
+    private const int MaxDiceNumber = 6;
+    private const int MaxAttackDefendTroops = 3;
+    private const int MinAttackDefendTroops = 1;
+    
     private IList<int> _attackers = new List<int>();
     private IList<int> _defenders = new List<int>();
     private Tuple<Territory, int> _attacker;
@@ -27,63 +24,64 @@ public class Combat
         _defenders = defenders;
     }
 
-    public Tuple<int, int> attack(int numAttacker, int numDefender)
+    public Tuple<int, int> Attack(int numAttacker, int numDefender)
     {
         _attacker = new Tuple<Territory, int>(_attacker.Item1, numAttacker);
         _defender = new Tuple<Territory, int>(_defender.Item1, numDefender);
 
-        if (!isNumberTroopsValid())
+        if (!IsNumberTroopsValid())
         {
             throw new ArgumentException("The number of troops cannot be less or equal 0 or more than 3");
         }
 
-        if (!checkAttackValidity())
+        if (!CheckAttackValidity())
         {
             return Tuple.Create(0, 0);
         }
 
-        if (!_attackers.Any() && !_defenders.Any())
+        if (_attackers.Any() && _defenders.Any())
         {
-            _attackers = declarePower(_attacker.Item2);
-            _defenders = declarePower(_defender.Item2);
+            return ComputeAttack(_attackers, _defenders);
         }
-        return computeAttack(_attackers, _defenders);
+        
+        _attackers = DeclarePower(_attacker.Item2);
+        _defenders = DeclarePower(_defender.Item2);
+        return ComputeAttack(_attackers, _defenders);
     }
 
-    private bool isNumberTroopsValid()
+    private bool IsNumberTroopsValid()
     {
-        return _defender.Item2 <= Constants.MAX_ATTACK_DEFEND_ARMY && _defender.Item2 >= Constants.MIN_ATTACK_DEFEND_ARMY
-                && _attacker.Item2 <= Constants.MAX_ATTACK_DEFEND_ARMY && _attacker.Item2 >= Constants.MIN_ATTACK_DEFEND_ARMY;
+        return _defender.Item2 <= MaxAttackDefendTroops && _defender.Item2 >= MinAttackDefendTroops
+                && _attacker.Item2 <= MaxAttackDefendTroops && _attacker.Item2 >= MinAttackDefendTroops;
     }
 
-    private bool checkAttackValidity()
+    private bool CheckAttackValidity()
     {
         return true;
     }
 
-    private IList<int> declarePower(int number)
+    private IList<int> DeclarePower(int number)
     {
         return Enumerable.Range(0, number)
-            .Select(i => rollDice())
+            .Select(i => RollDice())
             .OrderByDescending(i => i)
             .ToList();
     }
 
-    private int rollDice()
+    private int RollDice()
     {
-        return new Random().Next(Constants.MAX_DICE_NUMBER) + 1;
+        return new Random().Next(MaxDiceNumber) + 1;
     }
 
-    private Tuple<int, int> computeAttack(IList<int> attackers, IList<int> defenders)
+    private Tuple<int, int> ComputeAttack(IList<int> attackers, IList<int> defenders)
     {
         IList<bool> results = new List<bool>();
         while (attackers.Any() && defenders.Any())
         {
-            results.Add(attackers[0] > defenders[0] ? true : false);
+            results.Add(attackers[0] > defenders[0]);
             attackers.RemoveAt(0);
             defenders.RemoveAt(0);
         }
-
         return new Tuple<int, int>(results.Count(v => results.Contains(true)), results.Count(v => results.Contains(false)));
     }
 }

@@ -3,8 +3,8 @@
 public class Territory
 {
 
-    public string Name { get; set; }
-    public int BonusTroops { get; set; }
+    private string Name { get; set; }
+    private int BonusTroops { get; set; }
 
     public Territory(string name, int bonusTroops)
     {
