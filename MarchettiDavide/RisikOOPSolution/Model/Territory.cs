@@ -2,7 +2,7 @@
 
 public class Territory
 {
-    public string Name { get; set;  }
+    public string Name { get; set; }
     public int Troops { get; set; }
     public readonly ISet<string> Adjust;
 

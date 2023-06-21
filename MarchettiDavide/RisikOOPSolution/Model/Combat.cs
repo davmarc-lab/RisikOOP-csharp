@@ -1,4 +1,4 @@
-namespace RisikOOPSolution.Model;
+﻿namespace RisikOOPSolution.Model;
 
 internal enum Result
 {
@@ -11,7 +11,7 @@ public class Combat
     private const int MaxDiceNumber = 6;
     private const int MaxAttackDefendTroops = 3;
     private const int MinAttackDefendTroops = 1;
-    
+
     private IList<int> _attackers = new List<int>();
     private IList<int> _defenders = new List<int>();
     private Tuple<Territory, int> _attacker;
@@ -49,7 +49,7 @@ public class Combat
         {
             return ComputeAttack(_attackers, _defenders);
         }
-        
+
         _attackers = DeclarePower(_attacker.Item2);
         _defenders = DeclarePower(_defender.Item2);
         return ComputeAttack(_attackers, _defenders);
@@ -66,7 +66,7 @@ public class Combat
     private bool CheckAttackValidity()
     {
         return _attacker.Item1.Adjust.Contains(_defender.Item1.Name);
-         }
+    }
 
     private IList<int> DeclarePower(int number)
     {

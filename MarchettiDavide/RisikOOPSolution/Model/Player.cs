@@ -6,11 +6,13 @@ public class Player
 {
     private ISet<Territory> _territories = new HashSet<Territory>();
     private int _id;
-    
-    public int Id { get => _id;
+
+    public int Id
+    {
+        get => _id;
         set => _id = value;
     }
-    
+
     public ISet<Territory> Territories
     {
         get => _territories;
@@ -29,10 +31,10 @@ public class Player
     {
         Territories = Territories.Concat(territories).ToHashSet();
     }
-    
+
     public void RemoveTerritory(Territory territory)
     {
         Territories.Remove(territory);
     }
-    
+
 }

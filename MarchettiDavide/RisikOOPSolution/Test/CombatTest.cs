@@ -1,9 +1,7 @@
-using System.Collections.Immutable;
-
-namespace RisikOOPSolution.Test;
-
+﻿
 using RisikOOPSolution.Model;
 
+namespace RisikOOPSolution;
 [TestClass]
 public class UnitTest1
 {
@@ -24,7 +22,6 @@ public class UnitTest1
         new Territory("Brazil", 5, new HashSet<string>() { "Venezuela" })
     };
 
-    [TestInitialize]
     private void PreparePlayers()
     {
         _p1.Territories.Clear();
@@ -32,24 +29,26 @@ public class UnitTest1
         _p1.AddTerritories(_attackerTerritories);
         _p2.AddTerritories(_defenderTerritories);
     }
-    
+
     [TestMethod]
     public void PlayerCreationTest()
     {
         Assert.AreEqual(1, _p1.Id);
         Assert.AreEqual(2, _p2.Id);
     }
-    
+
     [TestMethod]
     public void AddTerritoriesToPlayersTest()
     {
+        PreparePlayers();
         Assert.IsTrue(_p1.Territories.IsSupersetOf(_attackerTerritories));
         Assert.IsTrue(_p2.Territories.IsSupersetOf(_defenderTerritories));
     }
-    
+
     [TestMethod]
     public void RemoveTerritoriesToPlayersTest()
     {
+        PreparePlayers();
         _p1.RemoveTerritory(_attackerTerritories[0]);
         _p1.RemoveTerritory(_attackerTerritories[2]);
         _p1.RemoveTerritory(_attackerTerritories[3]);
@@ -70,7 +69,7 @@ public class UnitTest1
         d.AddTroops(-2);
         Assert.AreEqual(3, d.Troops);
     }
-    
+
     [TestMethod]
     public void CombatWithInvalidTroops()
     {

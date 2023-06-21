@@ -19,5 +19,5 @@ public class PlayerBuilder
         return this;
     }
 
-    public Player Build() => new Player(_id, _territories);
+    public Player Build() => new(_id, _territories);
 }
