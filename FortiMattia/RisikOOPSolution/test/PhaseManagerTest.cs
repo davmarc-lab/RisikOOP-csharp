@@ -15,28 +15,28 @@ namespace RisikOOPSolution.test
         [TestMethod]
         public void TestPhaseIteration()
         {
-            Assert.IsTrue(_phaseManager.GetCurrentPhase().Equals("REINFORCEMENTS"));
+            Assert.AreEqual(_phaseManager.GetCurrentPhase(), "REINFORCEMENTS");
             _phaseManager.SwitchToNextPhase();
-            Assert.IsTrue(_phaseManager.GetCurrentPhase().Equals("COMBAT"));
+            Assert.AreEqual(_phaseManager.GetCurrentPhase(), "COMBAT");
             _phaseManager.SwitchToNextPhase();
-            Assert.IsTrue(_phaseManager.GetCurrentPhase().Equals("MOVEMENT"));
+            Assert.AreEqual(_phaseManager.GetCurrentPhase(), "MOVEMENT");
             _phaseManager.SwitchToNextPhase();
-            Assert.IsTrue(_phaseManager.GetCurrentPhase().Equals("REINFORCEMENTS"));
+            Assert.AreEqual(_phaseManager.GetCurrentPhase(), "REINFORCEMENTS");
             _phaseManager.SwitchToNextPhase();
-            Assert.IsTrue(_phaseManager.GetCurrentPhase().Equals("COMBAT"));
+            Assert.AreEqual(_phaseManager.GetCurrentPhase(), "COMBAT");
         }
 
         [TestMethod]
         public void TestPhaseSkip()
         {
             _phaseManager.SwitchToPhase("REINFORCEMENTS");
-            Assert.IsTrue(_phaseManager.GetCurrentPhase().Equals("REINFORCEMENTS"));
+            Assert.AreEqual(_phaseManager.GetCurrentPhase(), "REINFORCEMENTS");
             _phaseManager.SwitchToPhase("MOVEMENT");
-            Assert.IsTrue(_phaseManager.GetCurrentPhase().Equals("MOVEMENT"));
+            Assert.AreEqual(_phaseManager.GetCurrentPhase(), "MOVEMENT");
             _phaseManager.SwitchToPhase("COMBAT");
-            Assert.IsTrue(_phaseManager.GetCurrentPhase().Equals("COMBAT"));
+            Assert.AreEqual(_phaseManager.GetCurrentPhase(), "COMBAT");
             _phaseManager.SwitchToPhase("REINFORCEMENTS");
-            Assert.IsTrue(_phaseManager.GetCurrentPhase().Equals("REINFORCEMENTS"));
+            Assert.AreEqual(_phaseManager.GetCurrentPhase(), "REINFORCEMENTS");
         }
     }
 }

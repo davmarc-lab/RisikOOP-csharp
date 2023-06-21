@@ -18,10 +18,10 @@ namespace RisikOOPSolution.test
         {
             Assert.IsNotNull(_territory1);
             Assert.IsNotNull(_territory2);
-            Assert.IsTrue(_territory1.Name == SOURCE_TERRITORY_NAME);
-            Assert.IsTrue(_territory2.Name == DESTINATION_TERRITORY_NAME);
-            Assert.IsTrue(_territory1.Troops == INITIAL_TROOPS);
-            Assert.IsTrue(_territory2.Troops == INITIAL_TROOPS);
+            Assert.AreEqual(_territory1.Name, SOURCE_TERRITORY_NAME);
+            Assert.AreEqual(_territory2.Name, DESTINATION_TERRITORY_NAME);
+            Assert.AreEqual(_territory1.Troops, INITIAL_TROOPS);
+            Assert.AreEqual(_territory2.Troops, INITIAL_TROOPS);
         }
 
         [TestMethod]
@@ -37,12 +37,12 @@ namespace RisikOOPSolution.test
         {
             Movement movement = new(_territory1, _territory2);
             movement.Move(VALID_TROOPS);
-            Assert.IsTrue(movement.SourceTerritory.Troops == INITIAL_TROOPS - VALID_TROOPS);
-            Assert.IsTrue(movement.DestinationTerritory.Troops == INITIAL_TROOPS + VALID_TROOPS);
+            Assert.AreEqual(movement.SourceTerritory.Troops, INITIAL_TROOPS - VALID_TROOPS);
+            Assert.AreEqual(movement.DestinationTerritory.Troops, INITIAL_TROOPS + VALID_TROOPS);
             movement = new(_territory2, _territory1);
             movement.Move(VALID_TROOPS);
-            Assert.IsTrue(movement.SourceTerritory.Troops == INITIAL_TROOPS - VALID_TROOPS);
-            Assert.IsTrue(movement.DestinationTerritory.Troops == INITIAL_TROOPS + VALID_TROOPS);
+            Assert.AreEqual(movement.SourceTerritory.Troops, INITIAL_TROOPS - VALID_TROOPS);
+            Assert.AreEqual(movement.DestinationTerritory.Troops, INITIAL_TROOPS + VALID_TROOPS);
         }
     }
 }

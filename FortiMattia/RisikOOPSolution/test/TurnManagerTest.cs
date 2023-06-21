@@ -23,13 +23,13 @@ namespace RisikOOPSolution.test
         public void TestPlayerOrder()
         {
             List<int> playerList = _turnManager.PlayersIDs;
-            Assert.IsTrue(playerList[0] == _turnManager.GetCurrentPlayerID());
+            Assert.AreEqual(playerList[0], _turnManager.GetCurrentPlayerID());
             _turnManager.SwitchToNextPlayer();
-            Assert.IsTrue(playerList[1] == _turnManager.GetCurrentPlayerID());
+            Assert.AreEqual(playerList[1], _turnManager.GetCurrentPlayerID());
             _turnManager.SwitchToNextPlayer();
-            Assert.IsTrue(playerList[2] == _turnManager.GetCurrentPlayerID());
+            Assert.AreEqual(playerList[2], _turnManager.GetCurrentPlayerID());
             _turnManager.SwitchToNextPlayer();
-            Assert.IsTrue(playerList[3] == _turnManager.GetCurrentPlayerID());
+            Assert.AreEqual(playerList[3], _turnManager.GetCurrentPlayerID());
             _turnManager.ResetTurns();
         }
 
@@ -37,15 +37,15 @@ namespace RisikOOPSolution.test
         public void TestResetTurns()
         {
             List<int> playerList = _turnManager.PlayersIDs;
-            Assert.IsTrue(playerList[0] == _turnManager.GetCurrentPlayerID());
+            Assert.AreEqual(playerList[0], _turnManager.GetCurrentPlayerID());
             _turnManager.SwitchToNextPlayer();
-            Assert.IsTrue(playerList[1] == _turnManager.GetCurrentPlayerID());
+            Assert.AreEqual(playerList[1], _turnManager.GetCurrentPlayerID());
             _turnManager.SwitchToNextPlayer();
-            Assert.IsTrue(playerList[2] == _turnManager.GetCurrentPlayerID());
+            Assert.AreEqual(playerList[2], _turnManager.GetCurrentPlayerID());
             _turnManager.ResetTurns();
-            Assert.IsTrue(playerList[0] == _turnManager.GetCurrentPlayerID());
+            Assert.AreEqual(playerList[0], _turnManager.GetCurrentPlayerID());
             _turnManager.SwitchToNextPlayer();
-            Assert.IsTrue(playerList[1] == _turnManager.GetCurrentPlayerID());
+            Assert.AreEqual(playerList[1], _turnManager.GetCurrentPlayerID());
             _turnManager.ResetTurns();
         }
     }
